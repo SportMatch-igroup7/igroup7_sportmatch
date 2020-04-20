@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="../Scripts/ajaxCalls.js"></script>
+    <script>
+        $(document).ready(function () {
+            ajaxCall("GET", "../api/Trainer", "", successGetTrainer, errorGetTrainer);
+        });
+        function successGetTrainer(data) {
+            console.log(data);
+            console.log(JSON.stringify(data));
+            var strTrainers="";
+            for (k in data) {
+                strTrainers += `<div class="TrainerFrame">`;
+                strTrainers += `<p>שם פרטי : ${data[k].FirstName} </p>`;
+                strTrainers += `<p>שם משפחה : ${data[k].LastName} </p>`;
+                strTrainers += `<p>מייל : ${data[k].Email} </p>`;
+                strTrainers += `<p>מספר טלפון 1 : ${data[k].Phone1} </p>`;
+                strTrainers += `<p>מספר טלפון 2 : ${data[k].Phone2} </p>`;
+                strTrainers += `<p>מין : ${data[k].Gender} </p>`;
+                strTrainers += `<p>קצת עלי : ${data[k].AboutMe} </p>`;
+                strTrainers += `<p>מחיר דרוש לשעה : ${data[k].PricePerHour} </p>`;
+                strTrainers += `<p>תאריך לידה : ${data[k].DateOfBirth} </p>`;
+                strTrainers += `</div><br/>`;
+            }
+            $(`#allTrainers`).append(strTrainers);
+           // document.getElementById("allTrainers").innerHTML = strTrainers;
+        }
+        function errorGetTrainer(err) {
+
+        }
+
+    </script>
+    <style>
+
+        div.TrainerFrame {
+            border-style: solid;
+            text-align:right;
+        }
+    </style>
+</head>
+<body>
+    <div id="allTrainers">
+    </div>
+</body>
+</html>
